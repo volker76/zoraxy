@@ -2747,10 +2747,6 @@
     "Datatype": "string"
    },
    {
-    "Title": "MaxRetries",
-    "Datatype": "int"
-   },
-   {
     "Title": "AssumeRoleArn",
     "Datatype": "string"
    },
