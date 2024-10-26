@@ -40,3 +40,5 @@ src/www/html/index.html
 src/sys.uuid
 src/zoraxy
 src/log/
+
+push.sh

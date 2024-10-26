@@ -12,22 +12,22 @@ RUN go mod tidy &&\
     go build -o /usr/local/bin/zoraxy &&\
     chmod 755 /usr/local/bin/zoraxy
 
-FROM docker.io/ubuntu:latest AS build-zerotier
+#FROM docker.io/ubuntu:latest AS build-zerotier
 
-RUN mkdir -p /opt/zerotier/source/ &&\
-    mkdir -p /usr/local/bin/
+#RUN mkdir -p /opt/zerotier/source/ &&\
+#    mkdir -p /usr/local/bin/
 
-WORKDIR /opt/zerotier/source/
+#WORKDIR /opt/zerotier/source/
 
-RUN apt-get update -y &&\
-    apt-get install -y curl jq build-essential pkg-config clang cargo libssl-dev
+#RUN apt-get update -y &&\
+#    apt-get install -y curl jq build-essential pkg-config clang cargo libssl-dev
 
-RUN curl -Lo ZeroTierOne.tar.gz https://codeload.github.com/zerotier/ZeroTierOne/tar.gz/refs/tags/1.10.6 &&\
-    tar -xzvf ZeroTierOne.tar.gz &&\
-    cd ZeroTierOne-* &&\
-    make &&\
-    mv ./zerotier-one /usr/local/bin/zerotier-one &&\
-    chmod 755 /usr/local/bin/zerotier-one
+#RUN curl -Lo ZeroTierOne.tar.gz https://codeload.github.com/zerotier/ZeroTierOne/tar.gz/refs/tags/1.10.6 &&\
+#    tar -xzvf ZeroTierOne.tar.gz &&\
+#    cd ZeroTierOne-* &&\
+#    make &&\
+#    mv ./zerotier-one /usr/local/bin/zerotier-one &&\
+#    chmod 755 /usr/local/bin/zerotier-one
 
 FROM docker.io/ubuntu:latest
 
@@ -36,7 +36,7 @@ RUN apt-get update -y &&\
 
 COPY --chmod=700 ./entrypoint.sh /opt/zoraxy/
 COPY --from=build-zoraxy /usr/local/bin/zoraxy /usr/local/bin/zoraxy
-COPY --from=build-zerotier /usr/local/bin/zerotier-one /usr/local/bin/zerotier-one
+#COPY --from=build-zerotier /usr/local/bin/zerotier-one /usr/local/bin/zerotier-one
 
 WORKDIR /opt/zoraxy/config/
 
